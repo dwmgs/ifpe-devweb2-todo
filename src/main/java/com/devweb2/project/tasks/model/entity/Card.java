@@ -3,6 +3,8 @@ package com.devweb2.project.tasks.model.entity;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -14,6 +16,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 
 @Entity
@@ -25,7 +28,10 @@ public class Card {
     private Long id;
 
     private String description;
+
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
     private LocalDateTime creationDate;
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
     private LocalDateTime endDate;
 
     @ManyToMany(fetch = FetchType.EAGER)
@@ -41,6 +47,11 @@ public class Card {
 
     @Enumerated(EnumType.STRING)
     private CardStatus status;
+
+    @PrePersist
+    public void prePersist(){
+        setCreationDate(LocalDateTime.now());
+    }
 
     public Long getId() {
         return id;
