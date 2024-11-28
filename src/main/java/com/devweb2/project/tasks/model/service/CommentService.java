@@ -6,8 +6,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.HttpStatusCodeException;
 
+import com.devweb2.project.tasks.exceptions.ApiRequestException;
 import com.devweb2.project.tasks.model.entity.Card;
 import com.devweb2.project.tasks.model.entity.Comment;
 import com.devweb2.project.tasks.model.entity.User;
@@ -29,18 +29,18 @@ public class CommentService {
 
     public Comment findById(Long id){
         return commentRepository.findById(id).orElseThrow(
-            () -> new HttpStatusCodeException(HttpStatus.NOT_FOUND) {});
+            () -> new ApiRequestException("Comment not found or does not exists! Please check the id", HttpStatus.NOT_FOUND) {});
     }
 
     public Comment addCommentToCard(Long cardId, Long userId, String content){
         Optional<Card> cardOptional = cardRepository.findById(cardId);
         if (cardOptional.isEmpty()) {
-            throw new IllegalArgumentException("Card not found");
+            throw new ApiRequestException("Card not found or does not exists!", HttpStatus.NOT_FOUND);
         }
 
         Optional<User> userOptional = userRepository.findById(userId);
         if (userOptional.isEmpty()) {
-            throw new IllegalArgumentException("User not found");
+            throw new ApiRequestException("User not found or does not exists!", HttpStatus.NOT_FOUND);
         }
 
         Card card = cardOptional.get();
@@ -59,7 +59,7 @@ public class CommentService {
     public Comment updateComment(Long id, String newContent) {
         Optional<Comment> commentOptional = commentRepository.findById(id);
         if (commentOptional.isEmpty()) {
-            throw new IllegalArgumentException("Comment not found");
+            throw new ApiRequestException("Comment not found or does not exists!", HttpStatus.NOT_FOUND);
         }
     
         Comment comment = commentOptional.get();
@@ -76,7 +76,7 @@ public class CommentService {
     public void delete(Long id) {
         Optional<Comment> commentOptional = commentRepository.findById(id);
         if (commentOptional.isEmpty()) {
-            throw new IllegalArgumentException("Comment not found");
+            throw new ApiRequestException("Comment not found or does not exists!", HttpStatus.NOT_FOUND);
         }
 
         validateExclusion(commentOptional.get(), id);

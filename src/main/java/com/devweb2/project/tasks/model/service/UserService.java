@@ -1,8 +1,12 @@
 package com.devweb2.project.tasks.model.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import com.devweb2.project.tasks.exceptions.ApiRequestException;
 import com.devweb2.project.tasks.model.entity.User;
 import com.devweb2.project.tasks.model.repository.UserRepository;
 
@@ -13,7 +17,8 @@ public class UserService {
     private UserRepository userRepository;
 
     public User findById(Long id){
-       return userRepository.findById(id).orElse(null);
+       return userRepository.findById(id).orElseThrow(
+            () -> new ApiRequestException("User not found or does not exists! Please check the id", HttpStatus.NOT_FOUND) {});
     }
 
     public User save(User user){
@@ -21,11 +26,16 @@ public class UserService {
     }
 
     public void delete(Long id){
+        Optional<User> user = userRepository.findById(id);
+        if (user.isEmpty()) {
+            throw new ApiRequestException("User not found or does not exists!", HttpStatus.NOT_FOUND);
+        }
+        
         userRepository.deleteById(id);
     }
 
     public User update(User user){
-        User userUpdate = userRepository.findById(user.getId()).orElse(null);
+        User userUpdate = findById(user.getId());
         userUpdate.setName(user.getName());
         userUpdate.setRole(user.getRole());
         return userRepository.save(userUpdate);

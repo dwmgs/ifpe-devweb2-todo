@@ -6,8 +6,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.HttpStatusCodeException;
 
+import com.devweb2.project.tasks.exceptions.ApiRequestException;
 import com.devweb2.project.tasks.model.entity.Card;
 import com.devweb2.project.tasks.model.entity.CardStatus;
 import com.devweb2.project.tasks.model.entity.User;
@@ -23,13 +23,9 @@ public class CardService {
     @Autowired
     private UserRepository userRepository;
 
-    /*
-     * 
-     * aplicar tratamento personalizado de excessões
-     */
     public Card findById(Long id){
         return cardRepository.findById(id).orElseThrow(
-            () -> new HttpStatusCodeException(HttpStatus.NOT_FOUND) {});
+            () -> new ApiRequestException("Card not found or does not exists! Please check the id", HttpStatus.NOT_FOUND) {});
     }
 
     public Card save(Card card){
@@ -40,12 +36,12 @@ public class CardService {
     public Card addUser(Long cardId, Long userId){
         Optional<Card> cardOptional = cardRepository.findById(cardId);
         if (cardOptional.isEmpty()) {
-            throw new IllegalArgumentException("Card not found with id: " + cardId);
+            throw new ApiRequestException("Card not found or does not exists!", HttpStatus.NOT_FOUND);
         }
 
         Optional<User> userOptional = userRepository.findById(userId);
         if (userOptional.isEmpty()) {
-            throw new IllegalArgumentException("User not found with id: " + userId);
+            throw new ApiRequestException("User not found or does not exists!", HttpStatus.NOT_FOUND);
         }
 
         Card card = cardOptional.get();
@@ -57,11 +53,15 @@ public class CardService {
     }
 
     public void delete(Long id){
+        Optional<Card> cardOptional = cardRepository.findById(id);
+        if (cardOptional.isEmpty()) {
+            throw new ApiRequestException("Card not found or does not exists!", HttpStatus.NOT_FOUND);
+        }
         cardRepository.deleteById(id);
     }
 
     public Card update(Card card){
-        Card cardUpdate = cardRepository.findById(card.getId()).orElse(null);
+        Card cardUpdate = findById(card.getId());
         cardUpdate.setDescription(card.getDescription());
         cardUpdate.setStatus(card.getStatus());
 
