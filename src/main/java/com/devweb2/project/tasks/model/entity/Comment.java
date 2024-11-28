@@ -2,6 +2,8 @@ package com.devweb2.project.tasks.model.entity;
 
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -24,6 +26,7 @@ public class Comment {
 
     @ManyToOne
     @JoinColumn(name = "card_id")
+    @JsonIgnore
     private Card card;
 
     private String content;

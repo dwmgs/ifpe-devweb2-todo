@@ -44,4 +44,10 @@ public class CardController {
         return ResponseEntity.ok(cardService.update(card));
     }
 
+    
+    @PutMapping(path = "/addUser", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Card> addUser(@RequestParam Long cardId, @RequestParam Long userId){
+        return ResponseEntity.ok(cardService.addUser(cardId, userId));
+    }
+
 }
