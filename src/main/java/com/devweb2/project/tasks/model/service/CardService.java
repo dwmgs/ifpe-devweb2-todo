@@ -1,7 +1,9 @@
 package com.devweb2.project.tasks.model.service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -49,6 +51,30 @@ public class CardService {
 
         card.getUsers().add(user);
 
+        return cardRepository.save(card);
+    }
+
+    /*
+     * 
+     * validar se cartão usuario pertence ao cartão;
+     */
+    public Card removeUser(Long cardId, Long userId){
+        Optional<Card> cardOptional = cardRepository.findById(cardId);
+        if (cardOptional.isEmpty()) {
+            throw new ApiRequestException("Card not found or does not exists!", HttpStatus.NOT_FOUND);
+        }
+
+        Optional<User> userOptional = userRepository.findById(userId);
+        if (userOptional.isEmpty()) {
+            throw new ApiRequestException("User not found or does not exists!", HttpStatus.NOT_FOUND);
+        }
+
+        Card card = cardOptional.get();
+        List<User> usersList = card.getUsers().stream()
+                                                .filter(u -> u.getId() != userId)
+                                                .collect(Collectors.toList());
+        
+        card.setUsers(usersList);
         return cardRepository.save(card);
     }
 

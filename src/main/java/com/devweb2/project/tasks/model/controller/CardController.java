@@ -50,4 +50,9 @@ public class CardController {
         return ResponseEntity.ok(cardService.addUser(cardId, userId));
     }
 
+    @PutMapping(path = "/removeUser", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Card> removeUser(@RequestParam Long cardId, @RequestParam Long userId){
+        return ResponseEntity.ok(cardService.removeUser(cardId, userId));
+    }
+
 }
