@@ -11,6 +11,7 @@
 	<groupId>com.devweb2.project</groupId>
 	<artifactId>tasks</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
 	<name>tasks</name>
 	<description>DevWeb2 Project</description>
 	<url/>
@@ -20,6 +21,9 @@
 	<developers>
 		<developer/>
 	</developers>
+	<modules>
+		<module>todo-api</module>
+	</modules>
 	<scm>
 		<connection/>
 		<developerConnection/>
