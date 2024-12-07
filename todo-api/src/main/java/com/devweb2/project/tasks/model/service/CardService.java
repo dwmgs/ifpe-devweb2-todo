@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 import com.devweb2.project.tasks.exceptions.ApiRequestException;
@@ -24,6 +25,9 @@ public class CardService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private KafkaTemplate<String, String> kafkaTemplate;
 
     public Card findById(Long id){
         return cardRepository.findById(id).orElseThrow(
@@ -92,7 +96,11 @@ public class CardService {
         cardUpdate.setStatus(card.getStatus());
 
         if (cardUpdate.getStatus() == CardStatus.DONE) {
-            cardUpdate.setEndDate(LocalDateTime.now());
+            LocalDateTime endDate = LocalDateTime.now();
+            cardUpdate.setEndDate(endDate);
+
+            String m = "Atividade " + card.getId().toString()+ " finalizada em: " + endDate.toString();
+            kafkaTemplate.send("mail_topic", "0", m);
         }
 
         return cardRepository.save(cardUpdate);
