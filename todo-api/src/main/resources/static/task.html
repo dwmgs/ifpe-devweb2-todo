@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="assets/list.ico" type="image/x-icon">
+    <link rel="stylesheet" href="task.css">
+    <script src="task.js" defer></script>
+    <title>Task Manager</title>
+</head>
+<body>
+    <h1>Add Task</h1>
+    <form id="taskForm">
+        <div class="form-row">
+            <input type="text" id="description" placeholder="Task Name" required>
+        </div>
+        <div class="form-row-2">
+            <input type="text" id="idUser" placeholder="Id User" required>
+            <button type="button" id="addTaskButton">Add Task</button>
+        </div>
+    </form>
+    <div id="taskList"></div>
+</body>
+</html>

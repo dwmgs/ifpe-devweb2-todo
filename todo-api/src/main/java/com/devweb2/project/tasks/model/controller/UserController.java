@@ -1,6 +1,8 @@
 package com.devweb2.project.tasks.model.controller;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -44,4 +46,9 @@ public class UserController {
         return ResponseEntity.ok(userService.update(user));
     }
 
+    @GetMapping(path = "/findAll", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<User>> findAll(){
+        return ResponseEntity.ok(userService.findAll());
+    }
+    
 }

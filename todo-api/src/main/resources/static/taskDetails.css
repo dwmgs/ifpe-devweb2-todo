@@ -1,0 +1,158 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    overflow: auto;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin: 20px 0;
+}
+
+.container {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+    margin: 20px 0;
+}
+
+.task-details {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.creator, .task-info {
+    flex: 1;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.creator h2, .task-info h2 {
+    color: #555;
+    margin-bottom: 10px;
+}
+
+p {
+    color: #333;
+    margin: 5px 0;
+}
+
+.actions {
+    display: flex;
+    justify-content: space-around;
+    gap: 10px;
+}
+
+.action-btn {
+    background-color: #87ceeb;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    text-align: center;
+}
+
+#saveTask {
+    background-color: #32cd32;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+    display: none;
+}
+
+#saveTask:hover {
+    background-color: #28a428;
+}
+
+#saveTask:focus {
+    outline: none;
+}
+
+.action-btn:hover {
+    background-color: #5aa9d6;
+}
+
+.comment-painel {
+    margin-top: 20px;
+}
+
+.comment-painel h1 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+#commentForm {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.input-group {
+    display: flex;
+    gap: 10px;
+}
+
+#commentForm input[type="text"], 
+#commentForm textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    resize: none;
+}
+
+#commentForm input[type="text"]:focus, 
+#commentForm textarea:focus {
+    outline: none;
+    border-color: #87ceeb;
+}
+
+#commentForm button {
+    background-color: #87ceeb;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+#commentForm button:hover {
+    background-color: #5aa9d6;
+}
+
+#commentList {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.comment-item {
+    background-color: #ffffff;
+    padding: 10px 
+}

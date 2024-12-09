@@ -1,5 +1,7 @@
 package com.devweb2.project.tasks.model.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.devweb2.project.tasks.model.entity.Card;
+import com.devweb2.project.tasks.model.entity.User;
 import com.devweb2.project.tasks.model.service.CardService;
 
 
@@ -53,6 +56,11 @@ public class CardController {
     @PutMapping(path = "/removeUser", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Card> removeUser(@RequestParam Long cardId, @RequestParam Long userId){
         return ResponseEntity.ok(cardService.removeUser(cardId, userId));
+    }
+
+    @GetMapping(path = "/findAll", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Card>> findAll(){
+        return ResponseEntity.ok(cardService.findAll());
     }
 
 }

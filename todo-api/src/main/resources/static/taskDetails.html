@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="assets/list.ico" type="image/x-icon">
+    <link rel="stylesheet" href="taskDetails.css">
+    <script src="taskDetails.js" defer></script>
+    <title>Task Details</title>
+</head>
+<body>
+        <div class="container">
+            <h1>Task Details</h1>
+            <div class="task-details">
+                <div class="creator">
+                    <h2>Creator</h2>
+                    <p><strong>Name:</strong> <span id="creatorName"></span></p>
+                    <p><strong>Role:</strong> <span id="creatorRole"></span></p>
+                </div>
+                <div class="task-info">
+                    <h2>Task</h2>
+                    <p><strong>Creation Date:</strong> <span id="creationDate"></span></p>
+                    <p><strong>End Date:</strong> <span id="endDate"></span></p>
+                    <p><strong>Status:</strong> <span id="status"></span></p>
+                </div>
+            </div>
+            <div class="actions">
+                <button class="action-btn" id="editTask">Edit</button>
+                <button class="action-btn" id="saveTask" style="display: none;">Save</button>
+                <button class="action-btn" id="deleteTask">Delete</button>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="comment-painel">
+            <h1>Comments</h1>
+            <form id="commentForm">
+                <div class="input-group">
+                    <input type="text" id="commentName" placeholder="Name" required />
+                    <input type="text" id="commentRole" placeholder="Role" required />
+                </div>
+                <textarea id="commentInput" placeholder="Add your comment here" required></textarea>
+                <button type="submit">Add Comment</button>
+            </form>
+            <div id="commentList">
+            </div>
+        </div>
+</body>
+</html>

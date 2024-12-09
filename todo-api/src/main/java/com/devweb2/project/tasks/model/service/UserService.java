@@ -1,5 +1,6 @@
 package com.devweb2.project.tasks.model.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,11 @@ public class UserService {
         User userUpdate = findById(user.getId());
         userUpdate.setName(user.getName());
         userUpdate.setRole(user.getRole());
+        userUpdate.setEmail(user.getEmail());
         return userRepository.save(userUpdate);
+    }
+
+    public List<User> findAll(){
+        return userRepository.findAll();
     }
 }

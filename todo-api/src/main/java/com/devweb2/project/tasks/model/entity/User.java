@@ -23,6 +23,7 @@ public class User {
 
     private String name;
     private String role;
+    private String email;
 
     @ManyToMany(mappedBy = "users", fetch = FetchType.LAZY)
     @JsonIgnore
@@ -74,6 +75,15 @@ public class User {
 
     public User setComments(List<Comment> comments) {
         this.comments = comments;
+        return this;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public User setEmail(String email) {
+        this.email = email;
         return this;
     }
 

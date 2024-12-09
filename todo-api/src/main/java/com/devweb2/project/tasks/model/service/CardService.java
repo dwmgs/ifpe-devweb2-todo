@@ -106,4 +106,7 @@ public class CardService {
         return cardRepository.save(cardUpdate);
     }
 
+    public List<Card> findAll(){
+        return cardRepository.findAll();
+    }
 }

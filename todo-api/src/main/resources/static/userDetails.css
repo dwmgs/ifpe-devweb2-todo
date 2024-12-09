@@ -1,0 +1,97 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    overflow: auto;
+}
+
+.container {
+    width: 100%;
+    max-width: 600px;
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.user-Details {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.creator p {
+    font-size: 16px;
+    color: #333;
+    margin: 5px 0;
+}
+
+.creator strong {
+    color: #87ceeb;
+}
+
+.user-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.action-btn {
+    background-color: #87ceeb;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.action-btn:hover {
+    background-color: #5aa9d6;
+}
+
+.action-btn:focus {
+    outline: none;
+}
+
+.user-actions .action-btn:first-child {
+    background-color: #ff6347; /* Red for Delete button */
+}
+
+.user-actions .action-btn:first-child:hover {
+    background-color: #e53e3e; /* Darker red on hover */
+}
+
+#saveTask {
+    background-color: #32cd32;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+    display: none;
+}
+
+#saveTask:hover {
+    background-color: #28a428;
+}
+
+#saveTask:focus {
+    outline: none;
+}
