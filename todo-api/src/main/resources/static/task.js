@@ -42,7 +42,7 @@ function salvarDados() {
         .then(savedTask => {         
             const taskItem = document.createElement("a");
             taskItem.className = "task-item";
-            taskItem.href = `taskDetails.html?id=${savedTask.description}`;
+            taskItem.href = `taskDetails.html?id=${savedTask.id}`;
             taskItem.textContent = `${savedTask.description}`;
 
             taskList.appendChild(taskItem);
@@ -67,7 +67,7 @@ function carregarTasks() {
             tasks.forEach(task => {
             const taskItem = document.createElement("a");
             taskItem.className = "task-item";
-            taskItem.href =  `taskDetails.html?id=${task.description}`;
+            taskItem.href =  `taskDetails.html?id=${task.id}`;
             taskItem.textContent = `${task.description}`;
 
             taskList.appendChild(taskItem);

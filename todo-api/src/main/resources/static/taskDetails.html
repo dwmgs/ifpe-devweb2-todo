@@ -9,6 +9,7 @@
     <title>Task Details</title>
 </head>
 <body>
+    <a href="task.html"><button id="backButton">Back</button></a>
         <div class="container">
             <h1>Task Details</h1>
             <div class="task-details">
@@ -19,6 +20,7 @@
                 </div>
                 <div class="task-info">
                     <h2>Task</h2>
+                    <p><strong>Task Name:</strong> <span id="description"></span></p>
                     <p><strong>Creation Date:</strong> <span id="creationDate"></span></p>
                     <p><strong>End Date:</strong> <span id="endDate"></span></p>
                     <p><strong>Status:</strong> <span id="status"></span></p>
@@ -36,8 +38,7 @@
             <h1>Comments</h1>
             <form id="commentForm">
                 <div class="input-group">
-                    <input type="text" id="commentName" placeholder="Name" required />
-                    <input type="text" id="commentRole" placeholder="Role" required />
+                    <input type="text" id="userId" placeholder="Id User" required />
                 </div>
                 <textarea id="commentInput" placeholder="Add your comment here" required></textarea>
                 <button type="submit">Add Comment</button>

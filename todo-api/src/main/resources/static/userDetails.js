@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 
-    document.getElementById("deleteTask").addEventListener("click", function() {
+    document.getElementById("deleteUser").addEventListener("click", function() {
         if (confirm("Tem certeza que deseja excluir este usuário?")) {
             fetch(`http://localhost:8080/api/user/delete?id=${userId}`, {
                 method: "DELETE",

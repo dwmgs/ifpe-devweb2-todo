@@ -10,6 +10,24 @@ body {
     overflow: auto;
 }
 
+#backButton {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+#backButton:hover {
+    background-color: darkred;
+}
+
 h1 {
     text-align: center;
     color: #333;
@@ -117,7 +135,7 @@ p {
 
 #commentForm input[type="text"], 
 #commentForm textarea {
-    width: 100%;
+    width: 94%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -149,10 +167,23 @@ p {
     margin-top: 20px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 15px;
 }
 
 .comment-item {
-    background-color: #ffffff;
-    padding: 10px 
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.comment-item p {
+    margin: 5px 0;
+    color: #333;
+    font-size: 14px;
+}
+
+.comment-item strong {
+    color: #555;
 }

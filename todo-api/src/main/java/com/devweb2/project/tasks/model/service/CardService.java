@@ -99,8 +99,8 @@ public class CardService {
             LocalDateTime endDate = LocalDateTime.now();
             cardUpdate.setEndDate(endDate);
 
-            String m = "Atividade " + card.getId().toString()+ " finalizada em: " + endDate.toString();
-            kafkaTemplate.send("mail_topic", "0", m);
+           //String m = "Atividade " + card.getId().toString()+ " finalizada em: " + endDate.toString();
+            //kafkaTemplate.send("mail_topic", "0", m);
         }
 
         return cardRepository.save(cardUpdate);

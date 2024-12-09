@@ -10,6 +10,24 @@ body {
     overflow: auto;
 }
 
+#backButton {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+#backButton:hover {
+    background-color: darkred;
+}
+
 .container {
     width: 100%;
     max-width: 600px;
