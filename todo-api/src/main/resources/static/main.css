@@ -6,7 +6,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;  /* Centraliza o conteúdo verticalmente */
+    justify-content: center; 
     height: 100vh;
     overflow: auto;
 }
@@ -24,7 +24,7 @@ h1 {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     margin: 10px 0;
     width: 100%;
-    max-width: 400px;  /* Controla o tamanho da seção */
+    max-width: 400px;  
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -35,12 +35,12 @@ button {
     background-color: #87ceeb;
     color: white;
     border: none;
-    padding: 15px 30px;  /* Aumenta o tamanho do botão */
+    padding: 15px 30px;  
     border-radius: 5px;
     cursor: pointer;
-    font-size: 18px;  /* Aumenta o tamanho da fonte */
+    font-size: 18px; 
     width: 100%;
-    max-width: 250px;  /* Limita a largura máxima dos botões */
+    max-width: 250px;  
     margin-top: 10px;
     transition: background-color 0.3s;
 }

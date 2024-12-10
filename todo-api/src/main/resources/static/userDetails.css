@@ -87,11 +87,11 @@ h1 {
 }
 
 .user-actions .action-btn:first-child {
-    background-color: #ff6347; /* Red for Delete button */
+    background-color: #ff6347;
 }
 
 .user-actions .action-btn:first-child:hover {
-    background-color: #e53e3e; /* Darker red on hover */
+    background-color: #e53e3e;
 }
 
 #saveTask {
