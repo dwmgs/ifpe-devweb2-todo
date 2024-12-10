@@ -3,8 +3,10 @@ package com.devweb2.project.tasks.model.service;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -14,6 +16,7 @@ import com.devweb2.project.tasks.exceptions.ApiRequestException;
 import com.devweb2.project.tasks.model.entity.Card;
 import com.devweb2.project.tasks.model.entity.CardStatus;
 import com.devweb2.project.tasks.model.entity.User;
+import com.devweb2.project.tasks.model.kafkaEntitites.DoneAlert;
 import com.devweb2.project.tasks.model.repository.CardRepository;
 import com.devweb2.project.tasks.model.repository.UserRepository;
 
@@ -27,7 +30,7 @@ public class CardService {
     private UserRepository userRepository;
 
     @Autowired
-    private KafkaTemplate<String, String> kafkaTemplate;
+    private KafkaTemplate<String, Object> kafkaTemplate;
 
     public Card findById(Long id){
         return cardRepository.findById(id).orElseThrow(
@@ -91,16 +94,30 @@ public class CardService {
     }
 
     public Card update(Card card){
+
         Card cardUpdate = findById(card.getId());
         cardUpdate.setDescription(card.getDescription());
         cardUpdate.setStatus(card.getStatus());
 
         if (cardUpdate.getStatus() == CardStatus.DONE) {
+            Hibernate.initialize(cardUpdate.getUsers());
+
             LocalDateTime endDate = LocalDateTime.now();
             cardUpdate.setEndDate(endDate);
 
-           //String m = "Atividade " + card.getId().toString()+ " finalizada em: " + endDate.toString();
-            //kafkaTemplate.send("mail_topic", "0", m);
+            try {
+                for (User u : cardUpdate.getUsers()) {
+                    DoneAlert doneAlert = new DoneAlert();
+                    doneAlert.setMessage("Atividade " + card.getId().toString()+ " finalizada em: " + endDate.toString());
+                    doneAlert.setMail(u.getEmail());
+                    
+                    kafkaTemplate.send("notifier", UUID.randomUUID().toString(), doneAlert);
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
         }
 
         return cardRepository.save(cardUpdate);
