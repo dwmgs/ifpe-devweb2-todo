@@ -16,7 +16,7 @@ import org.springframework.kafka.support.serializer.JsonDeserializer;
 @Configuration
 public class ConsumerKafkaConfiguration {
     
-    private final String bootstrapAddress = "127.0.0.1:9091";
+    private final String bootstrapAddress = "kafka1:19091";
 
     @Bean
     public ConsumerFactory<String, String> consumerFactory() {

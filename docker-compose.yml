@@ -1,3 +1,4 @@
+version: '3.8'
 services:
   zookeeper:
     image: zookeeper:3.4.9
@@ -19,7 +20,7 @@ services:
     ports:
       - "9091:9091"
     environment:
-      KAFKA_ADVERTISED_LISTENERS: LISTENER_DOCKER_INTERNAL://kafka1:19091,LISTENER_DOCKER_EXTERNAL://${DOCKER_HOST_IP:-127.0.0.1}:9091
+      KAFKA_ADVERTISED_LISTENERS: LISTENER_DOCKER_INTERNAL://kafka1:19091,LISTENER_DOCKER_EXTERNAL://kafka1:9091
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: LISTENER_DOCKER_INTERNAL:PLAINTEXT,LISTENER_DOCKER_EXTERNAL:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: LISTENER_DOCKER_INTERNAL
       KAFKA_ZOOKEEPER_CONNECT: "zookeeper:2181"
@@ -29,6 +30,7 @@ services:
       - ./data/kafka1/data:/var/lib/kafka/data
     depends_on:
       - zookeeper
+      
   kafdrop:
     image: obsidiandynamics/kafdrop
     restart: "no"
@@ -36,5 +38,23 @@ services:
       - "9000:9000"
     environment:
       KAFKA_BROKERCONNECT: "kafka1:19091"
+    depends_on:
+      - kafka1
+
+  todo-api:
+    build:
+      context: .
+      dockerfile: todo-api/Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - kafka1
+
+  notifier:
+    build:
+      context: .
+      dockerfile: notifier/Dockerfile
+    ports:
+      - "8081:8081"
     depends_on:
       - kafka1

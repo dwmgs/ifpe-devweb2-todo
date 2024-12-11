@@ -14,7 +14,7 @@ import org.springframework.kafka.support.serializer.JsonSerializer;
 
 @Configuration
 public class ProducerKafkaConfig {
-    private final String bootStrapAddress = "127.0.0.1:9091";
+    private final String bootStrapAddress = "kafka1:19091";
 
     @Bean
     public ProducerFactory<String, Object> producerFactory(){
