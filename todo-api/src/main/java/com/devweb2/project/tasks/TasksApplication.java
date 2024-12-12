@@ -8,7 +8,7 @@ public class TasksApplication {
 
 	public static void main(String[] args) {
 		SpringApplication app = new SpringApplication(TasksApplication.class);
-        app.setAdditionalProfiles("h2");
+        app.setAdditionalProfiles("postgresql");
         app.run(args);
 	}
 
