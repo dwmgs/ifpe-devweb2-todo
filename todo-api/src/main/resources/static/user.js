@@ -13,7 +13,7 @@ function salvarDados() {
 
     const dataUser = { name, role , email};
 
-    fetch("http://localhost:8080/api/user/save", {
+    fetch("/api/user/save", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -44,26 +44,24 @@ function salvarDados() {
         });
 }
 
-    function carregarUsuarios() {
-        fetch("http://localhost:8080/api/user/findAll")
-            .then(response => response.json())
-            .then(users => {
-                userList.innerHTML = "";
+    fetch("/api/user/findAll")
+        .then(response => response.json())
+        .then(users => {
+            userList.innerHTML = "";
 
-                users.forEach(user => {
-                    const userItem = document.createElement("a");
-                    userItem.className = "user-item";
-                    userItem.href = `userDetails.html?id=${user.id}`;
-                    userItem.textContent = `${user.name}`;
+            users.forEach(user => {
+                const userItem = document.createElement("a");
+                userItem.className = "user-item";
+                userItem.href = `userDetails.html?id=${user.id}`;
+                userItem.textContent = `${user.name}`;
 
-                    userList.appendChild(userItem);
-                });
-            })
-            .catch(error => {
-                console.error("Erro ao carregar os usuários:", error);
-                alert("Erro ao carregar a lista de usuários.");
+                userList.appendChild(userItem);
             });
-    }
+        })
+        .catch(error => {
+            console.error("Erro ao carregar os usuários:", error);
+            alert("Erro ao carregar a lista de usuários.");
+        });
 
 
 carregarUsuarios();
