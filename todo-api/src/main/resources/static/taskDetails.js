@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
     }
 
-    fetch(`http://52.90.166.42:8080/api/card/findById?id=${taskId}`, {
+    fetch(`http://localhost:8080/api/card/findById?id=${taskId}`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json"
@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", function () {
             status: document.getElementById("editStatus").value,
         };
     
-        fetch("http://52.90.166.42:8080/api/card/update", {
+        fetch("http://localhost:8080/api/card/update", {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
@@ -99,7 +99,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     document.getElementById("deleteTask").addEventListener("click", function () {
         if (confirm("Tem certeza que deseja excluir esta tarefa?")) {
-            fetch(`http://52.90.166.42:8080/api/card/delete?id=${taskId}`, {
+            fetch(`http://localhost:8080/api/card/delete?id=${taskId}`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",
@@ -128,7 +128,7 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        fetch(`http://52.90.166.42:8080/api/user/findById?id=${userId}`, {
+        fetch(`http://localhost:8080/api/user/findById?id=${userId}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",

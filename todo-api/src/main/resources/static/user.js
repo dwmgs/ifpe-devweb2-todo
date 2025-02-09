@@ -13,7 +13,7 @@ function salvarDados() {
 
     const dataUser = { name, role , email};
 
-    fetch("http://52.90.166.42:8080/api/user/save", {
+    fetch("http://localhost:8080/api/user/save", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -45,7 +45,7 @@ function salvarDados() {
 }
 
     function carregarUsuarios() {
-        fetch("http://52.90.166.42:8080/api/user/findAll")
+        fetch("http://localhost:8080/api/user/findAll")
             .then(response => response.json())
             .then(users => {
                 userList.innerHTML = "";

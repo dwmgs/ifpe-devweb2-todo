@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function() {
         return;
     }
 
-    fetch(`http://52.90.166.42:8080/api/user/findById?id=${userId}`, {
+    fetch(`http://localhost:8080/api/user/findById?id=${userId}`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json"
@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", function() {
             email: document.getElementById("editEmail").value.trim()
         };
 
-        fetch("http://52.90.166.42:8080/api/user/update", {
+        fetch("http:localhost:8080/api/user/update", {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"
@@ -75,7 +75,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     document.getElementById("deleteUser").addEventListener("click", function() {
         if (confirm("Tem certeza que deseja excluir este usuário?")) {
-            fetch(`http://52.90.166.42:8080/api/user/delete?id=${userId}`, {
+            fetch(`http:localhost:8080/api/user/delete?id=${userId}`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json"
