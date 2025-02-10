@@ -1,6 +1,11 @@
 package com.devweb2.project.tasks.model.entity;
 
+import java.util.Collection;
 import java.util.List;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -15,23 +20,36 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "USERS")
-public class User {
+public class User implements UserDetails{
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String name;
     private String role;
     private String email;
-
+    private String senha;
     @ManyToMany(mappedBy = "users", fetch = FetchType.LAZY)
     @JsonIgnore
     private List<Card> cards;
-
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     @JsonIgnore
     private List<Comment> comments;
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority("ROLE_" + role));
+    }
+
+    @Override
+    public String getPassword() {
+        return senha;
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
 
     public Long getId() {
         return id;

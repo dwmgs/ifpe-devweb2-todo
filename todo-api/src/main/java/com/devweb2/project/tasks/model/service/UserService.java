@@ -5,6 +5,9 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.devweb2.project.tasks.exceptions.ApiRequestException;
@@ -12,7 +15,7 @@ import com.devweb2.project.tasks.model.entity.User;
 import com.devweb2.project.tasks.model.repository.UserRepository;
 
 @Service
-public class UserService {
+public class UserService implements UserDetailsService{
     
     @Autowired
     private UserRepository userRepository;
@@ -45,5 +48,11 @@ public class UserService {
 
     public List<User> findAll(){
         return userRepository.findAll();
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return userRepository.findByEmailIgnoreCase(username).orElseThrow(
+            () -> new ApiRequestException("User not found or does not exists! Please check the email", HttpStatus.NOT_FOUND) {});
     }
 }

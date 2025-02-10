@@ -61,10 +61,6 @@ public class CardService {
         return cardRepository.save(card);
     }
 
-    /*
-     * 
-     * validar se cartão usuario pertence ao cartão;
-     */
     public Card removeUser(Long cardId, Long userId){
         Optional<Card> cardOptional = cardRepository.findById(cardId);
         if (cardOptional.isEmpty()) {
