@@ -17,12 +17,14 @@ public class RestControllerExceptionHandler {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public final ResponseEntity<ExceptionResponse> handleAllException(Exception e, WebRequest request){
         ExceptionResponse response = new ExceptionResponse(e.getMessage());
+        e.printStackTrace();
         return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @ExceptionHandler(ApiRequestException.class)
     public final ResponseEntity<ExceptionResponse> handleExceptionResponseException(ApiRequestException e, WebRequest request){
         ExceptionResponse response = new ExceptionResponse(e.getMessage());
+        e.printStackTrace();
         return new ResponseEntity<>(response, e.getStatusCode());
     }
 }

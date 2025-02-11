@@ -53,6 +53,9 @@ public class Card {
         setCreationDate(LocalDateTime.now());
     }
 
+    public Card() {
+    }
+
     public Long getId() {
         return id;
     }

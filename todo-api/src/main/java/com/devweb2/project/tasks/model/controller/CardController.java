@@ -3,6 +3,7 @@ package com.devweb2.project.tasks.model.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -35,7 +36,13 @@ public class CardController {
     @PostMapping(path = "/save", produces = MediaType.APPLICATION_JSON_VALUE , consumes = MediaType.APPLICATION_JSON_VALUE)
     @PreAuthorize("hasRole('ADMIN') OR hasRole('USER')")
     public ResponseEntity<Card> save(@RequestBody Card card){
-        return ResponseEntity.ok(cardService.save(card));
+        try {
+            return ResponseEntity.ok(cardService.save(card));
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
     }
    
     @DeleteMapping(path = "/delete")
