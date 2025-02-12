@@ -12,6 +12,7 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
+@EnableMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {
         @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -25,8 +26,8 @@ public class SecurityConfig {
         return http.build();
     }
 
-//     @Bean
-//     public PasswordEncoder codificadorSenha(){
-//         return new BCryptPasswordEncoder();
-//     }
+    // @Bean
+    // public PasswordEncoder codificadorSenha(){
+    //     return new BCryptPasswordEncoder();
+    // }
 }

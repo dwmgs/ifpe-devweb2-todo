@@ -50,6 +50,11 @@ public class User implements UserDetails{
         return senha;
     }
 
+    public User setPassword(String senha) {
+        this.senha = senha;
+        return this;
+    }
+
     @Override
     public String getUsername() {
         return email;

@@ -2,6 +2,7 @@ package com.devweb2.project.tasks.model.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,22 +25,26 @@ public class CommentController {
     private CommentService commentService;
 
     @GetMapping("/findById")
+    @PreAuthorize("hasRole('ADMIN') OR hasRole('USER')")
     public ResponseEntity<Comment> findById(@RequestParam Long id) {
         return ResponseEntity.ok(commentService.findById(id));
     }
     
     @PostMapping("/addComment")
+    @PreAuthorize("hasRole('ADMIN') OR hasRole('USER')")
     public ResponseEntity<Comment> addComment(@RequestParam Long cardId, @RequestParam Long userId,@RequestBody String content) {
         Comment comment = commentService.addCommentToCard(cardId, userId, content);
         return ResponseEntity.ok(comment);
     }
 
     @PutMapping("/update")
+    @PreAuthorize("hasRole('ADMIN') OR hasRole('USER')")
     public ResponseEntity<Comment> putMethodName(@RequestParam Long id, @RequestBody String content){
         return ResponseEntity.ok(commentService.updateComment(id, content));
     }
 
     @DeleteMapping("/delete")
+    @PreAuthorize("hasRole('ADMIN') OR hasRole('USER')")
     public ResponseEntity<?> delete(@RequestParam Long id){
         commentService.delete(id);
         return ResponseEntity.noContent().build();

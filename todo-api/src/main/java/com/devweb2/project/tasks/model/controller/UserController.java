@@ -27,27 +27,32 @@ public class UserController {
     private UserService userService;
 
     @GetMapping(path = "/findById", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PreAuthorize("hasRole('ADMIN') OR hasRole('USER')")
     public ResponseEntity<User> findById(@RequestParam Long id){
         return ResponseEntity.ok(userService.findById(id));
     }
 
     @PostMapping(path = "/save", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<User> save(@RequestBody User user){
         return ResponseEntity.ok(userService.save(user));
     }
     
     @DeleteMapping(path = "/delete")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> delete(@RequestParam Long id){
         userService.delete(id);
         return ResponseEntity.noContent().build();
     }
 
     @PutMapping(path = "/update", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PreAuthorize("hasRole('ADMIN') OR hasRole('USER')")
     public ResponseEntity<User> update(@RequestBody User user){
         return ResponseEntity.ok(userService.update(user));
     }
 
     @GetMapping(path = "/findAll", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PreAuthorize("hasRole('ADMIN') OR hasRole('USER')")
     public ResponseEntity<List<User>> findAll(){
         return ResponseEntity.ok(userService.findAll());
     }
