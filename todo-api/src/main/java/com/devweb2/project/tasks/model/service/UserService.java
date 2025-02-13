@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.devweb2.project.tasks.exceptions.ApiRequestException;
@@ -46,8 +47,12 @@ public class UserService implements UserDetailsService{
         return userRepository.save(userUpdate);
     }
 
-    public List<User> findAll(){
-        return userRepository.findAll();
+    public List<User> findAll(User u){
+        if (u.getRole().equals("ADMIN")) {
+            return userRepository.findAll();
+            
+        }
+        return userRepository.findAllByUserId(u.getId());
     }
 
     @Override

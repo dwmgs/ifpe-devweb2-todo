@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.devweb2.project.tasks.model.entity.Card;
+import com.devweb2.project.tasks.model.entity.User;
 import com.devweb2.project.tasks.model.service.CardService;
 
 
@@ -73,8 +75,8 @@ public class CardController {
 
     @GetMapping(path = "/findAll", produces = MediaType.APPLICATION_JSON_VALUE)
     @PreAuthorize("hasRole('ADMIN') OR hasRole('USER')")
-    public ResponseEntity<List<Card>> findAll(){
-        return ResponseEntity.ok(cardService.findAll());
+    public ResponseEntity<List<Card>> findAll(@AuthenticationPrincipal User  u){
+        return ResponseEntity.ok(cardService.findAll(u));
     }
 
 }

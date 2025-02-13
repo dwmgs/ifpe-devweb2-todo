@@ -119,7 +119,10 @@ public class CardService {
         return cardRepository.save(cardUpdate);
     }
 
-    public List<Card> findAll(){
-        return cardRepository.findAll();
+    public List<Card> findAll(User u){
+        if (u.getRole().equals("ADMIN")) {
+            return cardRepository.findAll();
+        }
+        return cardRepository.findAllByUserId(u.getId());
     }
 }

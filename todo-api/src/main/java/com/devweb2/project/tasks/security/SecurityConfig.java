@@ -20,7 +20,12 @@ public class SecurityConfig {
             .authorizeHttpRequests(authorize -> authorize
                 .anyRequest().authenticated() 
             )
-            .formLogin(Customizer.withDefaults()) 
+            .formLogin(form -> form
+                .defaultSuccessUrl("/main.html", true) 
+                .permitAll())
+            .logout(logout -> logout
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/login"))
             .csrf(csrf -> csrf.disable()); 
 
         return http.build();
