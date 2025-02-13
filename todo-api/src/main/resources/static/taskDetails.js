@@ -10,15 +10,14 @@ document.addEventListener("DOMContentLoaded", function () {
     const editButton = document.getElementById("editTask");
     const saveButton = document.getElementById("saveTask");
 
-    const commentForm = document.getElementById("commentForm");
-    const commentList = document.getElementById("commentList");
+    
 
     if (!taskId) {
         alert("ID da tarefa não fornecido!");
         return;
     }
 
-    fetch(`http://3.88.187.94:8080/api/card/findById?id=${taskId}`, {
+    fetch(`http://localhost:8080/api/card/findById?id=${taskId}`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json"
@@ -44,19 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
         console.error("Erro:", error);
         alert("Não foi possível carregar os dados da tarefa.");
     });
-
-    function renderComments(comments) {
-        commentList.innerHTML = "";
-        comments.forEach(comment => {
-            const commentElement = document.createElement("div");
-            commentElement.classList.add("comment-item");
-            commentElement.innerHTML = `
-                <p><strong>${comment.name} (${comment.role}):</strong></p>
-                <p>${comment.text}</p>
-            `;
-            commentListElement.appendChild(commentElement);
-        });
-    }
+    
 
     document.getElementById("editTask").addEventListener("click", function () {
         description.innerHTML = `<input type="text" id="editDescription" value="${description.textContent}">`;
@@ -79,7 +66,7 @@ document.addEventListener("DOMContentLoaded", function () {
             status: document.getElementById("editStatus").value,
         };
     
-        fetch("http://3.88.187.94:8080/api/card/update", {
+        fetch("http://localhost:8080/api/card/update", {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
@@ -99,7 +86,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     document.getElementById("deleteTask").addEventListener("click", function () {
         if (confirm("Tem certeza que deseja excluir esta tarefa?")) {
-            fetch(`http://3.88.187.94:8080/api/card/delete?id=${taskId}`, {
+            fetch(`http://localhost:8080/api/card/delete?id=${taskId}`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",
@@ -116,49 +103,5 @@ document.addEventListener("DOMContentLoaded", function () {
                 });
         }
     });
-
-    document.getElementById("commentForm").addEventListener("submit", function (e) {
-        e.preventDefault();
-
-        const userId = document.getElementById("userId").value.trim();
-        const commentText = document.getElementById("commentInput").value.trim();
-
-        if (!userId || !commentText) {
-            alert("Preencha todos os campos!");
-            return;
-        }
-
-        fetch(`http://3.88.187.94:8080/api/user/findById?id=${userId}`, {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-            },
-        })
-            .then(response => {
-                if (!response.ok) throw new Error("Erro ao buscar usuário");
-                return response.json();
-            })
-            .then(user => {
-                const comment = {
-                    userId: user.id,
-                    name: user.name,
-                    role: user.role,
-                    text: commentText,
-                };
-
-                const commentElement = document.createElement("div");
-                commentElement.classList.add("comment");
-                commentElement.innerHTML = `
-                    <p><strong>${comment.name} (${comment.role}):</strong> ${comment.text}</p>
-                `;
-                commentList.appendChild(commentElement);
-
-                alert("Comentário adicionado com sucesso!");
-                commentForm.reset();
-            })
-            .catch(error => {
-                console.error("Erro:", error);
-                alert("Não foi possível adicionar o comentário.");
-            });
-    });
+    
 });

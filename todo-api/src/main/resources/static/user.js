@@ -5,15 +5,16 @@ function salvarDados() {
     const name = document.getElementById("name").value.trim();
     const role = document.getElementById("role").value.trim();
     const email = document.getElementById("email").value.trim();
+    const cpf = document.getElementById("cpf").value.trim();
 
-    if (!name || !role || !email) {
+    if (!name || !role || !email || !cpf) {
         alert("Preencha todos os campos!");
         return;
     }
 
-    const dataUser = { name, role , email};
+    const dataUser = { name, role , email, cpf};
 
-    fetch("http://3.88.187.94:8080/api/user/save", {
+    fetch("http://localhost:8080/api/user/save", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -35,6 +36,7 @@ function salvarDados() {
             document.getElementById("name").value = "";
             document.getElementById("role").value = "";
             document.getElementById("email").value = "";
+            document.getElementById("cpf").value = "";
 
             alert("Usuário adicionado com sucesso!");
         })
@@ -45,7 +47,7 @@ function salvarDados() {
 }
 
     function carregarUsuarios() {
-        fetch("http://3.88.187.94:8080/api/user/findAll")
+        fetch("http://localhost:8080/api/user/findAll")
             .then(response => response.json())
             .then(users => {
                 userList.innerHTML = "";

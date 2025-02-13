@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const nameElement = document.getElementById("name");
     const roleElement = document.getElementById("role");
     const emailElement = document.getElementById("email");
+    const cpfElement = document.getElementById("cpf");
 
     const editButton = document.getElementById("editUser");
     const saveButton = document.getElementById("saveUser");
@@ -13,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function() {
         return;
     }
 
-    fetch(`http://3.88.187.94:8080/api/user/findById?id=${userId}`, {
+    fetch(`http://localhost:8080/api/user/findById?id=${userId}`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json"
@@ -30,6 +31,7 @@ document.addEventListener("DOMContentLoaded", function() {
         nameElement.textContent = user.name;
         roleElement.textContent = user.role;
         emailElement.textContent = user.email;
+        cpfElement.textContent = user.cpf;
     })
     .catch(error => {
         console.error("Erro:", error);
@@ -40,6 +42,7 @@ document.addEventListener("DOMContentLoaded", function() {
         nameElement.innerHTML = `<input type="text" id="editName" value="${nameElement.textContent}">`;
         roleElement.innerHTML = `<input type="text" id="editRole" value="${roleElement.textContent}">`;
         emailElement.innerHTML = `<input type="text" id="editEmail" value="${emailElement.textContent}">`;
+        cpfElement.innerHTML = `<input type="text" id="editCpf" value="${cpfElement.textContent}">`;
 
         editButton.style.display = "none";
         saveButton.style.display = "inline-block";
@@ -50,10 +53,11 @@ document.addEventListener("DOMContentLoaded", function() {
             id: userId,
             name: document.getElementById("editName").value.trim(),
             role: document.getElementById("editRole").value.trim(),
-            email: document.getElementById("editEmail").value.trim()
+            email: document.getElementById("editEmail").value.trim(),
+            cpf: document.getElementById("editCpf").value.trim()
         };
 
-        fetch("http://3.88.187.94:8080/api/user/update", {
+        fetch("http://localhost:8080/api/user/update", {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"
@@ -75,7 +79,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     document.getElementById("deleteUser").addEventListener("click", function() {
         if (confirm("Tem certeza que deseja excluir este usuário?")) {
-            fetch(`http://3.88.187.94:8080/api/user/delete?id=${userId}`, {
+            fetch(`http://localhost:8080/api/user/delete?id=${userId}`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json"
