@@ -28,7 +28,7 @@ public class User implements UserDetails{
     private String name;
     private String role;
     private String email;
-    private String senha;
+    private String password;
     @ManyToMany(mappedBy = "users", fetch = FetchType.LAZY)
     @JsonIgnore
     private List<Card> cards;
@@ -47,11 +47,11 @@ public class User implements UserDetails{
 
     @Override
     public String getPassword() {
-        return senha;
+        return password;
     }
 
-    public User setPassword(String senha) {
-        this.senha = senha;
+    public User setPassword(String password) {
+        this.password = password;
         return this;
     }
 

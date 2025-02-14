@@ -5,14 +5,15 @@ function salvarDados() {
     const name = document.getElementById("name").value.trim();
     const role = document.getElementById("role").value.trim();
     const email = document.getElementById("email").value.trim();
-    const cpf = document.getElementById("cpf").value.trim();
+    const password = document.getElementById("cpf").value.trim();
 
-    if (!name || !role || !email || !cpf) {
+    if (!name || !role || !email || !password) {
         alert("Preencha todos os campos!");
         return;
     }
 
-    const dataUser = { name, role , email, cpf};
+    const dataUser = { name, role , email, password};
+    console.log(dataUser);
 
     fetch("http://localhost:8080/api/user/save", {
         method: "POST",
