@@ -61,10 +61,6 @@ public class CardService {
         return cardRepository.save(card);
     }
 
-    /*
-     * 
-     * validar se cartão usuario pertence ao cartão;
-     */
     public Card removeUser(Long cardId, Long userId){
         Optional<Card> cardOptional = cardRepository.findById(cardId);
         if (cardOptional.isEmpty()) {
@@ -123,7 +119,10 @@ public class CardService {
         return cardRepository.save(cardUpdate);
     }
 
-    public List<Card> findAll(){
-        return cardRepository.findAll();
+    public List<Card> findAll(User u){
+        if (u.getRole().equals("ADMIN")) {
+            return cardRepository.findAll();
+        }
+        return cardRepository.findAllByUserId(u.getId());
     }
 }

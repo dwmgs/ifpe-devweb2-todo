@@ -103,5 +103,49 @@ document.addEventListener("DOMContentLoaded", function () {
                 });
         }
     });
-    
+
+    document.getElementById("commentForm").addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const userId = document.getElementById("userId").value.trim();
+        const commentText = document.getElementById("commentInput").value.trim();
+
+        if (!userId || !commentText) {
+            alert("Preencha todos os campos!");
+            return;
+        }
+
+        fetch(`http://localhost:8080/api/user/findById?id=${userId}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })
+            .then(response => {
+                if (!response.ok) throw new Error("Erro ao buscar usuário");
+                return response.json();
+            })
+            .then(user => {
+                const comment = {
+                    userId: user.id,
+                    name: user.name,
+                    role: user.role,
+                    text: commentText,
+                };
+
+                const commentElement = document.createElement("div");
+                commentElement.classList.add("comment");
+                commentElement.innerHTML = `
+                    <p><strong>${comment.name} (${comment.role}):</strong> ${comment.text}</p>
+                `;
+                commentList.appendChild(commentElement);
+
+                alert("Comentário adicionado com sucesso!");
+                commentForm.reset();
+            })
+            .catch(error => {
+                console.error("Erro:", error);
+                alert("Não foi possível adicionar o comentário.");
+            });
+    });
 });
