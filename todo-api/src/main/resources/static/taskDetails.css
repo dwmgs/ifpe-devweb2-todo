@@ -86,25 +86,6 @@ p {
     text-align: center;
 }
 
-#comments-row{
-    margin-top: 40px;
-}
-
-#comments-btn{
-    background-color: #05ca68;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px;
-    text-align: center;
-}
-
-#comments-btn:hover{
-    background-color: #4cc287;
-}
-
 #saveTask {
     background-color: #32cd32;
     color: white;
@@ -129,3 +110,80 @@ p {
     background-color: #5aa9d6;
 }
 
+.comment-painel {
+    margin-top: 20px;
+}
+
+.comment-painel h1 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+#commentForm {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.input-group {
+    display: flex;
+    gap: 10px;
+}
+
+#commentForm input[type="text"], 
+#commentForm textarea {
+    width: 94%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    resize: none;
+}
+
+#commentForm input[type="text"]:focus, 
+#commentForm textarea:focus {
+    outline: none;
+    border-color: #87ceeb;
+}
+
+#commentForm button {
+    background-color: #87ceeb;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+#commentForm button:hover {
+    background-color: #5aa9d6;
+}
+
+#commentList {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.comment-item {
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.comment-item p {
+    margin: 5px 0;
+    color: #333;
+    font-size: 14px;
+}
+
+.comment-item strong {
+    color: #555;
+}
