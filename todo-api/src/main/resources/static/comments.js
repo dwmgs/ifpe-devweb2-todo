@@ -25,7 +25,7 @@ document.getElementById("commentForm").addEventListener("submit", function (e) {
         return;
     }
 
-    fetch(`http://localhost:8080/api/user/findById?id=${userId}`, {
+    fetch(`http://34.201.166.146:8080/api/user/findById?id=${userId}`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
@@ -36,7 +36,7 @@ document.getElementById("commentForm").addEventListener("submit", function (e) {
         return response.json();
     })
     .then(user => {
-        return fetch(`http://localhost:8080/api/comment/addComment?cardId=${taskId}&userId=${user.id}`, {
+        return fetch(`http://34.201.166.146:8080/api/comment/addComment?cardId=${taskId}&userId=${user.id}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

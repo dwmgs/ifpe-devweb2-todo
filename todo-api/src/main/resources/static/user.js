@@ -15,7 +15,7 @@ function salvarDados() {
     const dataUser = { name, role , email, password};
     console.log(dataUser);
 
-    fetch("http://localhost:8080/api/user/save", {
+    fetch("http://34.201.166.146:8080/api/user/save", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -48,7 +48,7 @@ function salvarDados() {
 }
 
     function carregarUsuarios() {
-        fetch("http://localhost:8080/api/user/findAll")
+        fetch("http://34.201.166.146:8080/api/user/findAll")
             .then(response => response.json())
             .then(users => {
                 userList.innerHTML = "";
