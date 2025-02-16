@@ -1,4 +1,4 @@
-package com.devweb2.project.config;
+package com.devweb2.project.tasks.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
