@@ -10,7 +10,7 @@ function salvarDados() {
         return;
     }
 
-    fetch(`http://34.201.166.146:8080/api/user/findById?id=${idUser}`, {
+    fetch(`http://3.80.237.22:8080/api/user/findById?id=${idUser}`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json"
@@ -27,7 +27,7 @@ function salvarDados() {
                 users: [savedUser]
             };
 
-            return fetch("http://34.201.166.146:8080/api/card/save", {
+            return fetch("http://3.80.237.22:8080/api/card/save", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -59,7 +59,7 @@ function salvarDados() {
 }
 
 function carregarTasks() {
-    fetch("http://34.201.166.146:8080/api/card/findAll")
+    fetch("http://3.80.237.22:8080/api/card/findAll")
         .then(response => response.json())
         .then(tasks => {
             taskList.innerHTML = "";

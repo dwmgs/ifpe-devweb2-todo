@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function() {
         return;
     }
 
-    fetch(`http://34.201.166.146:8080/api/user/findById?id=${userId}`, {
+    fetch(`http://3.80.237.22:8080/api/user/findById?id=${userId}`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json"
@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", function() {
             cpf: document.getElementById("editCpf").value.trim()
         };
 
-        fetch("http://34.201.166.146:8080/api/user/update", {
+        fetch("http://3.80.237.22:8080/api/user/update", {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"
@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     document.getElementById("deleteUser").addEventListener("click", function() {
         if (confirm("Tem certeza que deseja excluir este usuário?")) {
-            fetch(`http://34.201.166.146:8080/api/user/delete?id=${userId}`, {
+            fetch(`http://3.80.237.22:8080/api/user/delete?id=${userId}`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json"
